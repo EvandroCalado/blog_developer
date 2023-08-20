@@ -1,9 +1,8 @@
 import React from 'react';
 import type { Preview } from '@storybook/react';
-import { Open_Sans } from 'next/font/google';
 import '../src/app/globals.css';
 
-const openSans = Open_Sans({ subsets: ['latin'] });
+import { withThemeByClassName } from '@storybook/addon-styling';
 
 const preview: Preview = {
   parameters: {
@@ -18,9 +17,13 @@ const preview: Preview = {
 };
 
 export const decorators = [
-  (Story) => (
-    <div className={openSans.className}>
-      <Story />
-    </div>
-  ),
+  (Story) => <Story />,
+
+  withThemeByClassName({
+    themes: {
+      light: 'light',
+      dark: 'dark',
+    },
+    defaultTheme: 'dark',
+  }),
 ];
